@@ -1,0 +1,25 @@
+tls:
+  options:
+    default: {}
+
+http:
+  serversTransports:
+    nginx:
+      insecureSkipVerify: true
+  services:
+    nginx:
+      loadBalancer:
+        servers:
+          - url: "http://nginx/"
+        #serversTransport: nginx
+  routers:
+    nginx:
+      entryPoints: ["dev-https"]
+      rule: "Host(`localhost`)"
+      middlewares: ["proxyHeader"]
+      service: "nginx"
+  middlewares:
+    proxyHeader:
+      headers:
+        customRequestHeaders:
+          X-L2-Proxy-Name: "traefik"

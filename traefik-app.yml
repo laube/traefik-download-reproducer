@@ -1,0 +1,21 @@
+tls:
+  options:
+    default: {}
+
+http:
+  services:
+    app:
+      loadBalancer:
+        servers:
+          - url: "http://app:3000/"
+  routers:
+    app:
+      entryPoints: ["dev-http", "dev-https"]
+      rule: "Host(`localhost`)"
+      middlewares: ["proxyHeader"]
+      service: "app"
+  middlewares:
+    proxyHeader:
+      headers:
+        customRequestHeaders:
+          X-Proxy-Name: "traefik"
