@@ -13,19 +13,6 @@ providers:
     watch: true
 
 log:
-  level: INFO
+  level: DEBUG
   format: json
-accessLog:
-  format: json
-  fields:
-    headers:
-      defaultMode: drop
-      names:
-        Authorization: redact
-        User-Agent: keep
-        Content-Type: keep
-        Accept: keep
-        Accept-Language: keep
-        Accept-Encoding: keep
-api:
-  dashboard: true
+accessLog: {}
